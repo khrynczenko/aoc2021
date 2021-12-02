@@ -10,25 +10,22 @@ parseInputFile path = do
     return $ map read $ lines contents
 
 countIncreases :: [DepthMeasurement] -> Word
-countIncreases [] = 0
-countIncreases [x] = 0
 countIncreases (x1:x2:xs) =
     if x2 > x1
     then 1 + recurse
     else recurse
   where
     recurse = countIncreases (x2:xs)
+countIncreases _ = 0
 
 countIncreasesTriple :: [DepthMeasurement] -> Word
-countIncreasesTriple [] = 0
-countIncreasesTriple [x1,x2,x3] = 0
 countIncreasesTriple (x1:x2:x3:x4:xs) =
     if x4 + x3 + x2 > x3 + x2 + x1
     then 1 + recurse
     else recurse
   where
     recurse = countIncreasesTriple (x2:x3:x4:xs)
-countIncreasesTriple xs = 0
+countIncreasesTriple _ = 0
 
 main :: IO ()
 main = do
