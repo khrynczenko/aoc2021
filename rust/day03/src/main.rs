@@ -32,11 +32,10 @@ fn calculate_power_consumption(binary_numbers: &[u16]) -> usize {
     gamma_rate as usize * epsilon_rate as usize
 }
 
-
 fn calculate_life_support_rating(binary_numbers: &[u16]) -> usize {
     let mut binary_numbersv: Vec<u16> = binary_numbers.iter().map(|&x| x).collect();
 
-    for i in 0..BIT_COUNT {
+    for i in 1..(BIT_COUNT + 1) {
         if binary_numbersv.len() == 1 {
             break;
         }
@@ -64,12 +63,9 @@ fn calculate_life_support_rating(binary_numbers: &[u16]) -> usize {
     let oxygen_generator_rating = *binary_numbersv.get(0).unwrap();
 
     let mut binary_numbersv: Vec<u16> = binary_numbers.iter().map(|&x| x).collect();
-    for i in 0..BIT_COUNT {
+    for i in 1..(BIT_COUNT + 1) {
         if binary_numbersv.len() == 1 {
             break;
-        }
-        for v in &binary_numbersv {
-            println!("{:#b}", v);
         }
         let ones: usize = binary_numbersv
             .iter()
@@ -93,7 +89,7 @@ fn calculate_life_support_rating(binary_numbers: &[u16]) -> usize {
     }
     let co2_scrubber_rating = *binary_numbersv.get(0).unwrap();
 
-    dbg!(oxygen_generator_rating) as usize * dbg!(co2_scrubber_rating) as usize
+    oxygen_generator_rating as usize * co2_scrubber_rating as usize
 }
 
 fn main() {
