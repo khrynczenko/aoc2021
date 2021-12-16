@@ -10,25 +10,11 @@ fn parse_input_file(path: &str) -> Vec<DepthMeasurment> {
 }
 
 fn count_increases(measurements: &[DepthMeasurment]) -> usize {
-    let mut increases = 0;
-    for i in 1..measurements.len() {
-        if measurements[i] > measurements[i - 1] {
-            increases += 1;
-        }
-    }
-    increases
+    measurements.windows(2).filter(|pair| pair[1] > pair[0]).count()
 }
 
 fn count_triple_increases(measurements: &[DepthMeasurment]) -> usize {
-    let mut increases = 0;
-    for i in 3..measurements.len() {
-        let window1 = measurements[i - 1] + measurements[i - 2] + measurements[i - 3];
-        let window2 = measurements[i] + measurements[i - 1] + measurements[i - 2];
-        if window2 > window1 {
-            increases += 1;
-        }
-    }
-    increases
+    measurements.windows(4).filter(|values| values[3] > values[0]).count()
 }
 
 fn main() {
